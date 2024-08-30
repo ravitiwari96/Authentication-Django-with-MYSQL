@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Register</h2>
+
+
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+          <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    
+   
+    {% for field in form %}
+      <!-- Exclude the "is_active" or similar field you don't want -->
+      {% if field.name != "is_active" %}
+        <div class="form-group">
+          <!-- Display the label and field -->
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          
+          <!-- Display errors for the specific field if they exist -->
+          {% if field.errors %}
+            <div class="error text-danger">
+              {% for error in field.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+    <button type="submit">Register</button>
+    <p><a href="{% url 'login' %}">LogIN</a></p>
+  </form>
+{% endblock %}

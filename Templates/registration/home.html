@@ -1,0 +1,13 @@
+from home
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+<p><a href="{% url 'login' %}">Logout</a></p>
+<p><a href="{% url 'login' %}">LogIN</a></p>
+
+
